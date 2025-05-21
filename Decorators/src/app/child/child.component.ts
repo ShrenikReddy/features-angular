@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './child.component.css'
 })
 export class ChildComponent {
-  @Input() recieveMessage: string = '';
+  @Input() showData: {id: number; name: string}[] = [];
 }
