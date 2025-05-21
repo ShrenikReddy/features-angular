@@ -1,5 +1,4 @@
-<app-child (myEvent)="recieveChildEvent($event)"></app-child>
 <div>
-  <h2>Parent Component</h2>
-  <p>{{ message }}</p>
+  <h2>App Component</h2>
+  <button #btnIncr (click)="incrChildCounter()">Increment Counter</button>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChildComponent } from "./child/child.component";
 import { JsonPipe } from '@angular/common';
@@ -9,9 +9,18 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  message: string ='';
-  recieveChildEvent(eventData: string) { 
-    this.message = eventData;
+export class AppComponent implements AfterViewInit {
+  @ViewChild(ChildComponent) ChildComponent?: ChildComponent;
+  @ViewChild('btnIncr') btnRef?: ElementRef<HTMLButtonElement>;
+
+  incrChildCounter(){
+    console.log(this.ChildComponent);
+    this.ChildComponent?.incrCounter();
+  }
+
+  ngAfterViewInit(): void{
+    if(this.btnRef?.nativeElement){
+      this.btnRef.nativeElement.innerHTML = 'Counter++';
+    }
   }
 }

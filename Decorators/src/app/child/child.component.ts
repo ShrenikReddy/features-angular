@@ -7,9 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './child.component.css'
 })
 export class ChildComponent {
-  @Output() myEvent = new EventEmitter ();
+ count: number = 0;
 
-  emitEvent() { 
-    this.myEvent.emit('Hello from child');
-  }
+ incrCounter(){
+    this.count++;
+ }
 }
