@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterContentChecked, Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -6,10 +6,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './child.component.html',
   styleUrl: './child.component.css'
 })
-export class ChildComponent {
- count: number = 0;
+export class ChildComponent implements AfterContentInit {
+ @ContentChild('showPara') paraRef?: ElementRef;
 
- incrCounter(){
-    this.count++;
+ ngAfterContentInit(): void { 
+    const content = this.paraRef?.nativeElement;
+    content.style.fontStyle = 'Italic';
+    console.log(this.paraRef);
  }
-}
+ }
+
