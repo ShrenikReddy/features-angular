@@ -10,10 +10,8 @@ import { JsonPipe } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  courses: { id:number; name: string }[]=[
-    {id:1, name: 'Javascript'},
-    {id:2, name: 'Angular'},
-    {id:3, name: 'React'},
-    {id:4, name: 'Vue'},
-  ]
+  message: string ='';
+  recieveChildEvent(eventData: string) { 
+    this.message = eventData;
+  }
 }
