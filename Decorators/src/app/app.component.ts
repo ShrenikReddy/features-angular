@@ -11,11 +11,14 @@ import { HighlightElementDirective } from './highlight-element.directive';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  weightInPounds: number = 0;
-  weightInKilograms: number =0;
-
-  convertWeight(){
-    this.weightInKilograms = this.weightInPounds * 0.453592;
-  }
-
+  showJson: boolean = false;
+  students= [ 
+    {name:'user a',age:21, gender:'female', major: 'computer science'},
+    {name:'user b',age:22, gender:'male', major: 'math'},
+    {name:'user c',age:23, gender:'female', major: 'english'},
+    {name:'user d',age:24, gender:'male', major: 'history'},
+  ]
+toggleJson(){
+  this.showJson = !this.showJson;
+}
 }
