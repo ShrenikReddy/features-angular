@@ -1,13 +1,10 @@
-<div class="table-container">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-      </tr>
-      <tr **ngFor="let emp of employees">
-        <td>{{ emp.name | titlecase }} </td>
-        <td>{{emp.Age | uppercase }}</td>
-        
-      </tr>
-    </table>
+<div>
+  <div *ngFor="let product of products | slice : startIndex : endIndex">
+    <h2>{{ product.name }}</h2>
+    <img [src]="product.imageUrl" alt="Course Image" width="400px"/>
+  </div>
+  <div>
+    <button type="button" (click)="previousPage()">Previous </button>
+    <button type="button" (click)="nextPage()">Next </button>
+  </div>
 </div>
