@@ -12,11 +12,5 @@ import { SortNumbersPipe } from './sort-numbers.pipe';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  numbers: number[] = [3,5,1,4,2];
-  sortOrder: 'asc' | 'desc' = 'asc';
-  showList: boolean = false;
-
-  showSorting(){
-    this.showList = true;
-  }
+  
 }
