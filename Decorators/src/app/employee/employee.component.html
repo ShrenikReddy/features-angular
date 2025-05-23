@@ -1,0 +1,11 @@
+<h1>Employees</h1>
+<div>
+    <ul>
+        @for ( em of employees; track $index){
+            <li>
+                {{emp.name}}
+                <button (click)="navigateToDetail(emp.id,emp.name)">View Details</button>
+            </li>
+        }
+    </ul>
+</div>
