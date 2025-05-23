@@ -1,5 +1,6 @@
+import { ɵnormalizeQueryParams } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -8,8 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './employee.component.css',
 })
 export class EmployeeComponent {
-  id: string = '';
-  name: string = '';
+ 
   employees = [
     {id:'101', name:'EmpA'},
     {id:'102', name:'EmpB'},
@@ -18,12 +18,12 @@ export class EmployeeComponent {
     {id:'105', name:'EmpE'},
   ];
 
-  constructor(private route: ActivatedRoute) {
-    this.route.queryParams.subscribe((params) => 
-    {
-      this.id = params['id'];
-      this.name = params['name'];
-      console.log(params);
-    })
+  constructor(private router: Router){}
+
+  navigateToDetail(empId: number, empName: string){
+    this.router.navigate(['/employee-detail'], {
+      queryParams: {id:empId, name: empName},
+    });
   }
+  
 }
