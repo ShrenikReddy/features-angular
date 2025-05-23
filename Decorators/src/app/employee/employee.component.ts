@@ -8,18 +8,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './employee.component.css',
 })
 export class EmployeeComponent {
-  employees = [
-    {id:'101', name:'EmpA',},
-    {id:'102', name:'EmpB', },
-    {id:'103', name:'EmpC', },
-    {id:'104', name:'EmpD', },
-  ]
   id: string = '';
   name: string = '';
+  employees = [
+    {id:'101', name:'EmpA'},
+    {id:'102', name:'EmpB'},
+    {id:'103', name:'EmpC'},
+    {id:'104', name:'EmpD'},
+    {id:'105', name:'EmpE'},
+  ];
 
   constructor(private route: ActivatedRoute) {
-    const params = this.route.snapshot.params;
-    this.id = params['id'];
-    this.name = params['name'];
+    this.route.queryParams.subscribe((params) => 
+    {
+      this.id = params['id'];
+      this.name = params['name'];
+      console.log(params);
+    })
   }
 }
