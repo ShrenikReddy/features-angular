@@ -1,7 +1,7 @@
 import { Component, InjectionToken } from '@angular/core';
 // import { RouterLink,RouterOutlet } from '@angular/router';
-import { FormControl, FormsModule, NgForm } from '@angular/forms';
-import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, NgForm, Validators } from '@angular/forms';
+import { ReactiveFormsModule,FormGroup, FormControl, FormArray } from '@angular/forms';
 // import { ProductsComponent } from './products/products.component';
 // import { MyComponentComponent } from "./my-component/my-component.component";
 // import { LogMessage1Service } from './services/log-message1.service';
@@ -16,17 +16,32 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
   imports: [FormsModule],
 })
 export class AppComponent {
-  usernameControl = new FormControl('',[
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(10),
-    Validators.pattern('^[a-zA-Z]+$')
-  ]);
+ employeeForm: FormGroup
 
-  showValue(){
-    console.log('Value:',this.usernameControl.value);
-    console.log('Validation Status:', this.usernameControl.valid);
-    console.log(this.usernameControl.errors);
+ constructor(){
+  this.employeeForm = new FormGroup({
+    employees: new FormArray([]),
+
+ });
+ }
+ get employees(): FormArray {
+  return this.employeeForm.get('employees') as FormArray;
+ }
+ 
+ addEmployee() {
+  const employeeGroup = new FormControl({
+    name: new FormControl('',Validators.required),
+    job: new FormControl('',Validators.required),
+  });
+  this.employees.push(employeeGroup);
+
+  submitForm(){
+    if(this.employeeForm.invalid){
+      return;
+    }
+    else{
+      console.log(this.employeeForm.value);
+    }
+    }
   }
-
 }
