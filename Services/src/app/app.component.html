@@ -1,7 +1,18 @@
-<form #myForm="ngForm" (ngSubmit)="submitForm()">
-  <div>
-    <label for="user">Name</label>
-    <input type="text" name="username"required />
-  </div>
-  <button type="submit">submit</button>
-</form>
+<div class="form-container">
+  <h1>Submit form</h1>
+  <form #myForm = "ngForm" (ngSubmit)="formSubmit(myForm)">
+    <div class="inputbox">
+      <input type="text" name="name" ngModel required #name="ngModel" />
+      <span>Name</span>
+    </div>
+    <div class="inputbox">
+      <input type="text" name="email" ngModel required #email="ngModel" />
+      <span>email</span>
+    </div>
+    <div class="inputbox">
+      <button type="submit">Submit</button>
+      <button type="button" (click)="resetValue(myForm)">Reset</button>
+      <button type="button" (click)="setDefault(myForm)">Default values</button>
+    </div>
+  </form>
+</div>
