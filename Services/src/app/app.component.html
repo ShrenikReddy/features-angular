@@ -1,1 +1,7 @@
-<app-notification></app-notification>
+<form #myForm="ngForm" (ngSubmit)="submitForm()">
+  <div>
+    <label for="user">Name</label>
+    <input type="text" name="username"required />
+  </div>
+  <button type="submit">submit</button>
+</form>

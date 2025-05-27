@@ -6,23 +6,25 @@ import { MyComponentComponent } from "./my-component/my-component.component";
 import { LogMessage1Service } from './services/log-message1.service';
 import { LogMessage2Service } from './log-message2.service';
 import { AlertMessage1Service } from './services/alert-message1.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, FormsModule, RouterLink, ProductsComponent, MyComponentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers:[AlertMessage1Service,
-    {provide: AlertMessage2Service, useExisting: AlertMessage1Service},
-   ],
-   template: <button (click)="displayAlert()">Show</button>
+  imports: [FormsModule]
+
   
 })
 export class AppComponent implments OnInit{
-    constructor(private alertMsg: AlertMessage1Service) { }
+    user: { username: string} = { username:''};
 
-    displayAlert(){
-      this.alertMsg.showAlert();
+    submitForm(myForm: NgForm) {
+      if(myForm.valid){
+        alert("S  ubmitted the form successfully, check console");
+        console.log(this.user);
+      }
     }
 }
 
