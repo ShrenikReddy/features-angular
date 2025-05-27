@@ -1,6 +1,7 @@
 import { Component, InjectionToken } from '@angular/core';
 // import { RouterLink,RouterOutlet } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormControl, FormsModule, NgForm } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 // import { ProductsComponent } from './products/products.component';
 // import { MyComponentComponent } from "./my-component/my-component.component";
 // import { LogMessage1Service } from './services/log-message1.service';
@@ -10,28 +11,22 @@ import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   imports: [FormsModule],
 })
 export class AppComponent {
-  formSubmit(myForm: NgForm) {
-    if (myForm.valid) {
-      const formValues = JSON.stringify(myForm.value);
-      console.log(formValues);
-      console.log('%c Form submitted successfully', 'color:green');
-    } else {
-      alert('Please fill all the fields');
-    }
+  usernameControl = new FormControl('',[
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(10),
+    Validators.pattern('^[a-zA-Z]+$')
+  ]);
+
+  showValue(){
+    console.log('Value:',this.usernameControl.value);
+    console.log('Validation Status:', this.usernameControl.valid);
+    console.log(this.usernameControl.errors);
   }
-  resetValue(myForm: NgForm) {
-    myForm.resetForm();
-  }
-  setDefault(myForm: NgForm) {
-    myForm.resetForm({
-      name: 'Default Name',
-      email: 'defaultId@gmail.com',
-    });
-  }
+
 }
