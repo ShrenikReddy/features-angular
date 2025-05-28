@@ -1,16 +1,1 @@
-<form class="container" [formGroup]="validateURL" (ngSubmit)="validate()"> 
-  <div class="mb-3">
-    <label class="form-label">Enter URL</label>
-    <input type="text" class="form-control" id="url" placeholder="Enter URL"
-    formControlName="checkURL">
-
-    @if (validateURL.get('checkURL')?.dirty && validateURL.get('checkURL')?.errors?.['urlValid']) {
-
-    
-    <div class="form-label text-danger"><sup>*</sup> URL format is not valid(</div>
-  </div>
-}
-  <div class="btn-group d-grid mb-3">
-    <button type="submit" class="btn btn-success">Submit</button>
-  </div>
-</form>
+<router-outlet></router-outlet>
