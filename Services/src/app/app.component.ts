@@ -1,7 +1,8 @@
 import { Component, InjectionToken } from '@angular/core';
 // import { RouterLink,RouterOutlet } from '@angular/router';
-import { FormControl, FormsModule, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, NgForm, Validators } from '@angular/forms';
 import { ReactiveFormsModule,FormGroup, FormControl, FormArray } from '@angular/forms';
+import { urlValidator } from './custom-validators/url-validator';
 // import { ProductsComponent } from './products/products.component';
 // import { MyComponentComponent } from "./my-component/my-component.component";
 // import { LogMessage1Service } from './services/log-message1.service';
@@ -16,32 +17,21 @@ import { ReactiveFormsModule,FormGroup, FormControl, FormArray } from '@angular/
   imports: [FormsModule],
 })
 export class AppComponent {
- employeeForm: FormGroup
+  validateURL: FormGroup;
 
- constructor(){
-  this.employeeForm = new FormGroup({
-    employees: new FormArray([]),
+  constructor(fb: FormBuilder){
+    this.validateURL = this.fb.group({
+      checkURL: ['', Validators.required, urlValidator],
+    });
 
- });
- }
- get employees(): FormArray {
-  return this.employeeForm.get('employees') as FormArray;
- }
- 
- addEmployee() {
-  const employeeGroup = new FormControl({
-    name: new FormControl('',Validators.required),
-    job: new FormControl('',Validators.required),
-  });
-  this.employees.push(employeeGroup);
-
-  submitForm(){
-    if(this.employeeForm.invalid){
-      return;
+  }
+  validate(){
+    if(!this.validateURL.valid){
+      alert('Please enter the correct URL');
+      return false;
     }
     else{
-      console.log(this.employeeForm.value);
-    }
+      return alert('URL is valid');
     }
   }
 }

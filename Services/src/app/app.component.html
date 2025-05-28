@@ -1,16 +1,16 @@
-<form [formArrayName="employeeForm" (ngSubmit)="submitForm()">
-  <h2>Employee Form</h2>
-  <div formArrayName="employees">
-    @for (emp of employees.controls; track emp; let i = $index) {
-  </div>>
-    <div class="employee-row">
-      <div class="employee-fields" [formGroupName]="i">
-        <label>Name:</label>
-        <input type="text" formControlName="name" placeholder="Enter employee job">
-      </div>
-    </div>
-  }
+<form class="container" [formGroup]="validateURL" (ngSubmit)="validate()"> 
+  <div class="mb-3">
+    <label class="form-label">Enter URL</label>
+    <input type="text" class="form-control" id="url" placeholder="Enter URL"
+    formControlName="checkURL">
+
+    @if (validateURL.get('checkURL')?.dirty && validateURL.get('checkURL')?.errors?.['urlValid']) {
+
+    
+    <div class="form-label text-danger"><sup>*</sup> URL format is not valid(</div>
   </div>
-  <button class="add-button" (click)="addEmployee()">Add Employee</button>
-  <button class="submit-button" [disabled]="employeeForm.invalid">Submit</button>
+}
+  <div class="btn-group d-grid mb-3">
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
 </form>
