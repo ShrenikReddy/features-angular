@@ -16,23 +16,32 @@ import { Observable } from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [FormsModule],
-  providers: [AuthService],
+  // imports: [FormsModule],
+  // providers: [AuthService],
 })
 export class AppComponent {
-  observable = new Observable((observer) =>{
-    observer.next('Hello');
-    observer.error('An error occurred');
-    observer.complete();
-  }).subscribe({
-    next(value){
-      console.log('Recieved Value:', value);
-    },
-    error(err){
-      console.error('Error:', err);
-    },
-    complete(){
-      console.log('Observable completed');
-    },
+  observable = new Observable<number>((observer)=>{
+    let count = 0;
+
+    const interval = setInterval(() => {
+      observer.next(count++);
+
+    },1000);
+    return () =>{
+      clearInterval(interval);
+      console.log('Interval cleared');
+    }
+    
   });
+  constructor(){
+    const obs= this.observable.subscribe((data)=>{
+      console.log('Data:',data);
+    }).unsubscribe();
+
+    setTimeout(()=>{
+      obs.unsubscribe();
+      console.log('Observable unsubscribed');
+    },5000);
+  }
+ 
 }
