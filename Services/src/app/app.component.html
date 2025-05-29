@@ -4,4 +4,10 @@
   @defer(){
     <app-test></app-test>
   }
+  @loading(after 1s; minimum 3s){
+    <h5>Loading component</h5>
+  }
+  @error {
+    <h2>Something went wrong</h2>
+  }
 </div>
