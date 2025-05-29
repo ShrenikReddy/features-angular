@@ -1,13 +1,25 @@
-<h3>Component is loading</h3>
-<hr/>
-<div class="app">
-  @defer(){
-    <app-test></app-test>
-  }
-  @loading(after 1s; minimum 3s){
-    <h5>Loading component</h5>
-  }
-  @error {
-    <h2>Something went wrong</h2>
+<div>
+  <h1 class="text-center">Article</h1>
+  <article>
+    <p>
+      Angular is a JavaScript framework for building single-page applications. It is a popular choice for building complex web applications during the last few years. Angular is a full-featured framework that includes a lot of features such as dependency injection, services, directives, and more. It also has a strong focus on security and performance 
+    </p>
+    <p>
+      React is a JavaScript library for building user interfaces. It is a popular choice for building complex web applications during the last few years. React is a library that includes a lot of features such as components, static typing, and more. It also has a strong focus on performance and security.
+    </p>
+    <p>
+      Vue.js is a JavaScript framework that is used for building single-page applications. It is a popular choice for building complex web applications during the last few years. Vue.js is a full-featured framework that includes a lot of features such as dependency injection, services, directives, and more. It also has a strong focus on security and performance.
+    </p>
+    <p>
+      JavaScript is a programming language that is used for building web applications. It is a popular choice for building complex web applications during the last few years. JavaScript is a full-featured language that includes a lot of features such as functions, loops, and more. It also has a strong focus on security and performance .
+    </p>
+  </article>
+</div>
+
+<div>
+  @defer (on viewport){
+    <app-users></app-users>
+  }@placeholder (minimum 800ms){
+    <h3>Loading Users </h3>
   }
 </div>
