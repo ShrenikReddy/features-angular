@@ -10,6 +10,7 @@ import { AuthService } from './authentication/auth.service';
 // import { LogMessage2Service } from './log-message2.service';
 // import { AlertMessage1Service } from './services/alert-message1.service';
 // import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +20,9 @@ import { AuthService } from './authentication/auth.service';
   providers: [AuthService],
 })
 export class AppComponent {
-  loadData: boolean = false;
-  showData: boolean = false;
-
-  onPrefetch(){
-    this.loadData = true;
+  constructor(){
+    const conservale = new Observable(() => {
+      console.log('Hello from observable');
+    }).subscribe();
   }
-  onDisplay(){
-    this.showData = true;
-  }
-
 }
