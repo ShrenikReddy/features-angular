@@ -20,9 +20,19 @@ import { Observable } from 'rxjs';
   providers: [AuthService],
 })
 export class AppComponent {
-  constructor(){
-    const conservale = new Observable(() => {
-      console.log('Hello from observable');
-    }).subscribe();
-  }
+  observable = new Observable((observer) =>{
+    observer.next('Hello');
+    observer.error('An error occurred');
+    observer.complete();
+  }).subscribe({
+    next(value){
+      console.log('Recieved Value:', value);
+    },
+    error(err){
+      console.error('Error:', err);
+    },
+    complete(){
+      console.log('Observable completed');
+    },
+  });
 }
