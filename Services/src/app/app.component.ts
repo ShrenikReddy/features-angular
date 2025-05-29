@@ -19,5 +19,14 @@ import { AuthService } from './authentication/auth.service';
   providers: [AuthService],
 })
 export class AppComponent {
-  
+  loadData: boolean = false;
+  showData: boolean = false;
+
+  onPrefetch(){
+    this.loadData = true;
+  }
+  onDisplay(){
+    this.showData = true;
+  }
+
 }
