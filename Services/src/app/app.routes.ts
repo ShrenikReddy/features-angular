@@ -8,6 +8,6 @@ export const routes: Routes = [
     // { path: 'login', component: LoginComponent },
     // { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }, 
     // { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: 'first', component: FirstComponent, },
+    { path: 'first', loadComponent() => import('./components/first/first.component') },
     { path: 'second', loadComponent() => import('./components/second/second.component').then(m => m.SecondComponent), }
 ];
