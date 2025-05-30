@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Observable, of } from "rxjs";
+import { interval } from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,12 @@ import { Observable, of } from "rxjs";
 })
 export class AppComponent implements OnInit{
   ngOnInit(): void {
-    const m = new Map();
-    m.set(1,'Hello');
-    m.set(2,'Converting to observable');
+    const obs$ = interval(1000);
+    obs$.subscribe(val => console.log(val));
 
-    const mapObs = from(m);
-    mapObs.subscribe((val) => console.log(val));
+    setTimeout(() => {
+      console.log('Unsubscribed...');
+      obsSubscribe.unsubscribe();
+    }, 5000);
 }
 }
