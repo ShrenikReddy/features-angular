@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, numberAttribute, OnInit } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { mergeMap, Observable, of } from "rxjs";
 import { interval, timer} from "rxjs";
 import { EMPTY } from "rxjs";
 import { filter } from "rxjs";
@@ -12,13 +12,15 @@ import { filter } from "rxjs";
   imports: [CommonModule],
 })
 export class AppComponent implements OnInit{
-  cursorPosition$: Observable<{ x: number; y: number }>;
+  outerObservable$ = from([1,2,3,4,5]);
+  innerObservable$ = from(value: number) => of(value * 2);
+
+  flattenObservable$ = this.outerObservable$.pipe(
+    mergeMap(this.innerObservable$)
+  );
 
   ngOnInit(): void {
-    this.cursorPosition$ = fromEvent<MouseEvent>(window,'mousemove');
-    .pipe(
-      map(e => ({x: e.clientX, y: e.clientY}))
-    );
+    this.flattenObservable$.subscribe((res) => console.log(res));
   }
 
 }
