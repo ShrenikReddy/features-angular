@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Observable, of } from "rxjs";
 
 @Component({
@@ -8,13 +8,13 @@ import { Observable, of } from "rxjs";
   styleUrl: './app.component.css',
   imports: [CommonModule],
 })
-export class AppComponent {
-  constructor(){
-    const observable$ = of({name: 'User', age: 27},
-         [1,2,3,4], 
-         () => 'Hello');
-    observable$.subscribe(( val => console.log( val )));
-  }
-  }
+export class AppComponent implements OnInit{
+  ngOnInit(): void {
+    const m = new Map();
+    m.set(1,'Hello');
+    m.set(2,'Converting to observable');
 
-
+    const mapObs = from(m);
+    mapObs.subscribe((val) => console.log(val));
+}
+}
