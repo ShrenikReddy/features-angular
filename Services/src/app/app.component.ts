@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -9,21 +9,12 @@ import { Observable } from "rxjs";
   imports: [CommonModule],
 })
 export class AppComponent {
-  jsonData$: Observable<any> | undefined;
-
   constructor(){
-    this.fetchData();
+    const observable$ = of({name: 'User', age: 27},
+         [1,2,3,4], 
+         () => 'Hello');
+    observable$.subscribe(( val => console.log( val )));
   }
-
-  fetchData(){
-    this.jsonData$ = new Observable<any>((observer) => {
-      fetch('https://dummyjson.com/products/category-list').then((response)) =>
-        response.json()).then((data) => {
-          observer.next(data);
-          observer.complete();
-        })
-        .catch((err) => ResizeObserver.error(err));
-    }
   }
 
 
