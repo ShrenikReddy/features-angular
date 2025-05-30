@@ -1,19 +1,21 @@
-<div class="text-center">
-  <button 
-  type="button"
-  class="btn btn-warning w-25 mx-3 my-3 fs-4"
-  (click)="onPrefetch()">Show Users</button>
-  <button 
-  type="button"
-  class="btn btn-warning w-25 mx-3 my-3 fs-4" #showContent (click)="onDisplay()">Display Users</button>
-</div>
-
 <div>
-  @defer (when showData; prefetch when loadData){
-    <app-users></app-users>
+  <h1>Fetching JSON data</h1>
+  <ng-container>
+    @if(jsonData$ | async; as data){
+    <table>
+      <thead>
+        <tr>
+          <th>Categories</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(category of data; track category){
+        <tr>
+          <td>{{ category }}</td>
+        </tr>
+      }
+      </tbody>
+    </table>
   }
-  @loading (minimum 800ms){
-    <h3 class="text-center p-2 m-2 fs-2">Loading Users</h3>
-  }
-  
+  </ng-container>
 </div>
