@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { interval } from "rxjs";
+import { interval, timer} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,7 @@ import { interval } from "rxjs";
 })
 export class AppComponent implements OnInit{
   ngOnInit(): void {
-    const obs$ = interval(1000);
-    obs$.subscribe(val => console.log(val));
-
-    setTimeout(() => {
-      console.log('Unsubscribed...');
-      obsSubscribe.unsubscribe();
-    }, 5000);
-}
+    const timerObs$ = timer(2000,1000);
+    timerObs$.subscribe((val) => console.log('Value: ${val}'));
+  }
 }
