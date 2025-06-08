@@ -1,26 +1,29 @@
-import { CommonModule } from "@angular/common";
-import { Component, numberAttribute, OnInit } from "@angular/core";
-import { mergeMap, Observable, of } from "rxjs";
-import { interval, timer} from "rxjs";
-import { EMPTY } from "rxjs";
-import { filter } from "rxjs";
+import { CommonModule } from '@angular/common';
+import { Component, numberAttribute, OnInit } from '@angular/core';
+import { concatMap, mergeMap, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { interval, timer } from 'rxjs';
+import { EMPTY } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  templateUrl:'app.component.html',
+  templateUrl: 'app.component.html',
   styleUrl: './app.component.css',
   imports: [CommonModule],
 })
-export class AppComponent implements OnInit{
-  outerObservable$ = from([1,2,3,4,5]);
-  innerObservable$ = from(value: number) => of(value * 2);
+export class AppComponent {
+  loadData: boolean = false;
+  responseData: any;
 
-  flattenObservable$ = this.outerObservable$.pipe(
-    mergeMap(this.innerObservable$)
-  );
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.flattenObservable$.subscribe((res) => console.log(res));
+  getData() {
+    this.http
+      .get('https://jsonplaceholder.typicode.com/users')
+      .subscribe((data) => {
+        this.responseData = data;
+        this.loadData = true;
+      });
   }
-
 }

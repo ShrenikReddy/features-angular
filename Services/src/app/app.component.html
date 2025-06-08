@@ -1,4 +1,9 @@
 <div>
-  <p>Cursor X: {{ (cursorPosition$ | async)?.x }} </p>
-  <p>Cursor Y: {{ (cursorPosition$ | async)?.y }} </p>
+  <button (click)="getData()">Get Data</button>
 </div>
+@if(loadData){
+<ng-container>
+  <h3>Response Data</h3>
+  <pre>{{ responseData | json }}</pre>
+</ng-container>
+}
