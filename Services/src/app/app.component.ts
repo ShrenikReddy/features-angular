@@ -13,10 +13,20 @@ import { filter } from 'rxjs';
   imports: [CommonModule],
 })
 export class AppComponent {
- count = signal<number>(0);
+  todoName: '' | undefined;
+  todos: WritableSignal<string[]> = signal([]);
 
- incrCounter(){
-  this.count.set(this.count() + 1);
-  console.log('Signal Value:', this.count());
- }
+  addTodo(todo: HTMLInputElement): void {
+    const item = todo.value;
+    this.todos.update((todos) => [item, ...todos]);
+    todo.value = '';
+    todo.focus();
+  }
+
+  removeTodo(index: number): void {
+    this.todos.update((todos) => [
+      ...todos.slice(0, index),
+      ...todos.slice(index + 1),
+    ]);
+  }
 }
