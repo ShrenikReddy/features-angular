@@ -13,17 +13,10 @@ import { filter } from 'rxjs';
   imports: [CommonModule],
 })
 export class AppComponent {
-  loadData: boolean = false;
-  responseData: any;
+ count = signal<number>(0);
 
-  constructor(private http: HttpClient) {}
-
-  getData() {
-    this.http
-      .get('https://jsonplaceholder.typicode.com/users')
-      .subscribe((data) => {
-        this.responseData = data;
-        this.loadData = true;
-      });
-  }
+ incrCounter(){
+  this.count.set(this.count() + 1);
+  console.log('Signal Value:', this.count());
+ }
 }

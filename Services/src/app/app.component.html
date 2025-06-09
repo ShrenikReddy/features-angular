@@ -1,9 +1,5 @@
+<h1>Angular Signals</h1>
 <div>
-  <button (click)="getData()">Get Data</button>
+  <button (click)="incrCounter()">Increment Counter</button>
+  <p>{{ count() }}</p>
 </div>
-@if(loadData){
-<ng-container>
-  <h3>Response Data</h3>
-  <pre>{{ responseData | json }}</pre>
-</ng-container>
-}
