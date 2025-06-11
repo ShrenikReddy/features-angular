@@ -1,22 +1,32 @@
-import { Component, signal } from '@angular/core';
-import { MessagesComponent } from './messages/messages.component';
-import { MessagesListComponent } from './messages/messages-list/messages-list.component';
+import { CommonModule } from '@angular/common';
+import { Component, numberAttribute, OnInit } from '@angular/core';
+import { concatMap, mergeMap, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { interval, timer } from 'rxjs';
+import { EMPTY } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [MessagesComponent, MessagesListComponent],
-  templateUrl: './app.component.html',
+  templateUrl: 'app.component.html',
   styleUrl: './app.component.css',
+  imports: [CommonModule],
 })
 export class AppComponent {
-  messages = signal<string[]>([]);
+  todoName: '' | undefined;
+  todos: WritableSignal<string[]> = signal([]);
 
-  addMessage(message: string) {
-    this.messages.update((oldMessages) => [...oldMessages, message]);
+  addTodo(todo: HTMLInputElement): void {
+    const item = todo.value;
+    this.todos.update((todos) => [item, ...todos]);
+    todo.value = '';
+    todo.focus();
   }
 
-  get appOutput() {
-    console.log('[App Component] binding re-evaluated.');
-    return;
+  removeTodo(index: number): void {
+    this.todos.update((todos) => [
+      ...todos.slice(0, index),
+      ...todos.slice(index + 1),
+    ]);
   }
 }
